@@ -28,7 +28,6 @@
     state: present
   with_items:
     - ansible-2.1.0.0
-    - gmake-4.2.1
     - gtar-1.29
     - python-2.7.12
     - unzip-6.0p9

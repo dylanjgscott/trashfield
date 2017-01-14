@@ -1,5 +1,10 @@
 ---
 
+- name: install fish dependencies
+  openbsd_pkg:
+    name: gmake-4.2.1
+    state: present
+
 - name: get fish
   unarchive:
     copy: no
