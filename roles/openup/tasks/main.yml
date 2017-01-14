@@ -1,0 +1,22 @@
+---
+
+- name: install openup
+  get_url:
+    dest: /usr/local/bin/openup
+    url: https://stable.mtier.org/openup
+    owner: root
+    group: bin
+    mode: 0755
+
+- name: configure openup
+  copy:
+    src: openup.conf
+    dest: /etc/openup.conf
+    mode: 0600
+
+- name: openup cron
+  cron:
+    job: /usr/local/bin/openup -c
+    name: openup
+    special_time: daily
+    state: present

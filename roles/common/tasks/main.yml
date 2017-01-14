@@ -1,0 +1,46 @@
+---
+
+- name: turn off password authentication
+  lineinfile:
+    line: PasswordAuthentication no
+    regexp: PasswordAuthentication
+    dest: /etc/ssh/sshd_config
+    state: present
+  notify: restart sshd
+
+- name: install pkg.conf
+  copy:
+    src: pkg.conf
+    dest: /etc/pkg.conf
+
+- name: install common packages
+  openbsd_pkg:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ansible-2.1.0.0
+    - gmake-4.2.1
+    - gtar-1.29
+    - python-2.7.12
+    - unzip-6.0p9
+    - vim-7.4.1467p1-no_x11
+
+- name: create links for python
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  with_items:
+    - src: /usr/local/bin/python2.7
+      dest: /usr/local/bin/python
+    - src: /usr/local/bin/python2.7-2to3
+      dest: /usr/local/bin/2to3
+    - src: /usr/local/bin/python2.7-config
+      dest: /usr/local/bin/python-config
+    - src: /usr/local/bin/pydoc2.7
+      dest: /usr/local/bin/pydoc
+
+- name: create user
+  user:
+    name: "{{ user }}"
+    state: present
