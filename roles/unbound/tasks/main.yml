@@ -1,0 +1,18 @@
+---
+
+- name: configure unbound
+  copy:
+    src: unbound.conf
+    dest: /var/unbound/etc/unbound.conf
+  notify: reload unbound
+
+- name: get root hints
+  get_url:
+    url: https://www.internic.net/domain/named.root
+    dest: /var/unbound/db/root.hints
+
+- name: enable unbound
+  service:
+    name: unbound
+    enabled: yes
+    state: started

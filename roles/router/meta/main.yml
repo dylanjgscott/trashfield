@@ -4,3 +4,4 @@ dependencies:
   - role: common
   - role: dhcpd
   - role: openup
+  - role: unbound
