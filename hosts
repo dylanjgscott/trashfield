@@ -2,4 +2,4 @@
 172.16.0.1 ansible_python_interpreter=/usr/local/bin/python2.7
 
 [laptop]
-172.16.0.2 ansible_python_interpreter=/usr/local/bin/python2.7
+172.16.0.129 ansible_python_interpreter=/usr/local/bin/python2.7

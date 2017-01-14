@@ -1,0 +1,15 @@
+---
+
+- name: enable routing
+  lineinfile:
+    create: yes
+    dest: /etc/sysctl.conf
+    line: net.inet.ip.forwarding=1
+  notify: enable routing
+
+- name: configure pf
+  copy:
+    src: pf.conf
+    dest: /etc/pf.conf
+    mode: 0600
+  notify: reload pf

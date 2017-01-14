@@ -1,6 +1,6 @@
 ---
 
-- name: install dhcpd.conf
+- name: configure dhcpd
   copy:
     src: dhcpd.conf
     dest: /etc/dhcpd.conf

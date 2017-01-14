@@ -1,6 +1,14 @@
 ---
 
-- name: turn off password authentication
+- name: disallow root login
+  lineinfile:
+    line: PermitRootLogin no
+    regexp: PermitRootLogin
+    dest: /etc/ssh/sshd_config
+    state: present
+  notify: restart sshd
+
+- name: disallow password authentication
   lineinfile:
     line: PasswordAuthentication no
     regexp: PasswordAuthentication
@@ -8,10 +16,11 @@
     state: present
   notify: restart sshd
 
-- name: install pkg.conf
+- name: configure pkg
   copy:
     src: pkg.conf
     dest: /etc/pkg.conf
+    mode: 0600
 
 - name: install common packages
   openbsd_pkg:
@@ -44,3 +53,10 @@
   user:
     name: "{{ user }}"
     state: present
+
+- name: configure doas
+  lineinfile:
+    create: yes
+    dest: /etc/doas.conf
+    line: "permit nopass keepenv {{ user }} as root"
+    mode: 0600
