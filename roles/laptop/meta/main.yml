@@ -1,6 +1,8 @@
 ---
 
 dependencies:
+  - role: aria2
   - role: common
   - role: fish
+  - role: mpd
   - role: openup

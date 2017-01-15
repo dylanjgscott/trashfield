@@ -1,0 +1,5 @@
+#!/usr/local/bin/fish
+set -l battery (apm -l)
+set -l date (date)
+set -l song (mpc current)
+xsetroot -name "$song | $battery% | $date"

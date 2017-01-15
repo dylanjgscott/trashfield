@@ -1,0 +1,29 @@
+---
+
+- name: install packages
+  openbsd_pkg:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - aria2-1.24.0
+
+- name: create aria directory
+  file:
+    dest: "{{ item.dest }}"
+    group: "{{ user }}"
+    owner: "{{ user }}"
+    state: directory
+  with_items:
+    - src: aria2.conf
+      dest: "/home/{{ user }}/.aria2"
+
+- name: configure aria
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    group: "{{ user }}"
+    owner: "{{ user }}"
+  with_items:
+    - src: aria2.conf
+      dest: "/home/{{ user }}/.aria2/aria2.conf"
+

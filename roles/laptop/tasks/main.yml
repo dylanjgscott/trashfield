@@ -1,0 +1,77 @@
+---
+
+- name: install packages
+  openbsd_pkg:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - dwm-6.1
+    - chromium-51.0.2704.106p0
+    - flock-20110525p1
+    - mpc-0.27p0
+    - ncmpc-0.24v0
+
+- name: fetch ports tree
+  unarchive:
+    copy: no
+    creates: /usr/ports
+    dest: /usr
+    remote_src: yes
+    src: http://mirror.internode.on.net/pub/OpenBSD/6.0/ports.tar.gz
+
+- name: create user directories
+  file:
+    dest: "{{ item }}"
+    state: directory
+    group: "{{ user }}"
+    owner: "{{ user }}"
+  with_items:
+    - "/home/{{ user }}/.vim/ftdetect"
+    - "/home/{{ user }}/.config"
+
+- name: configure user
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  with_items:
+    - src: Xresources
+      dest: "/home/{{ user }}/.Xresources"
+    - src: user-dirs.dirs
+      dest: "/home/{{ user }}/.config/user-dirs.dirs"
+    - src: vimrc
+      dest: "/home/{{ user }}/.vimrc"
+    - src: xsession
+      dest: "/home/{{ user }}/.xsession"
+    - src: yaml.vim
+      dest: "/home/{{ user }}/.vim/ftdetect/yaml.vim"
+
+- name: enable apmd
+  lineinfile:
+    dest: /etc/rc.conf.local
+    line: apmd_flags=-A
+    state: present
+  notify: restart apmd
+
+- name: user bin directory
+  file:
+    path: "/home/{{ user }}/bin"
+    state: directory
+    group: "{{ user }}"
+    owner: "{{ user }}"
+
+- name: user bin files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    group: "{{ user }}"
+    owner: "{{ user }}"
+    mode: 0755
+  with_items:
+    - src: dwm_status
+      dest: "/home/{{ user }}/bin/dwm_status"
+    - src: dwm_status_clock
+      dest: "/home/{{ user }}/bin/dwm_status_clock"
+    - src: dwm_status_song
+      dest: "/home/{{ user }}/bin/dwm_status_song"

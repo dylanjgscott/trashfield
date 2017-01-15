@@ -1,0 +1,31 @@
+---
+
+- name: install packages
+  openbsd_pkg:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - mpd-0.19.17
+    - mpc-0.27p0
+    - ncmpc-0.24v0
+
+- name: create mpd directory
+  file:
+    dest: "{{ item.dest }}"
+    group: "{{ user }}"
+    owner: "{{ user }}"
+    state: directory
+  with_items:
+    - src: mpd.conf
+      dest: "/home/{{ user }}/.mpd"
+
+- name: configure mpd
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    group: "{{ user }}"
+    owner: "{{ user }}"
+  with_items:
+    - src: mpd.conf
+      dest: "/home/{{ user }}/.mpd/mpd.conf"
+
