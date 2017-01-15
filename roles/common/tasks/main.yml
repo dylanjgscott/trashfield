@@ -53,6 +53,14 @@
     name: "{{ user }}"
     state: present
 
+- name: add ssh keys
+  authorized_key:
+    exclusive: yes
+    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVjwfD2KHjJNmSa8qZLyd469wRZjWxB4fVL9Cnvjt33jg400juy+rEYlcZ9Pmsfwe138pWCrHbR9FsOrSZwFdC298tzVeRIcXp07RwjnOrsYiHJB6dWTOJTfW0jCjPFL6JQMFk1IbdyWmQAdNHNoIuo01iz6tfuX13x04i9gFNFsxRGc8cjVtX/SFB6ifArwtn68prIBNd4XSnD8wt7GPs0Sd/brDOX9ix21eQOnfcG501hsjN+vKxCfOmJA4XOy91OUhsjkscAa5eoxqpme42oC1sZt9n2NSbbW8zqAUuHY5Zx8q4JOvjd/1nvlTlDZ55717dhKRjXMtrMi4eomDF
+    manage_dir: yes
+    state: present
+    user: "{{ user }}"
+
 - name: configure doas
   lineinfile:
     create: yes
