@@ -7,7 +7,10 @@
   with_items:
     - dwm-6.1
     - chromium-51.0.2704.106p0
+    - gnupg-2.1.9p0
     - flock-20110525p1
+    - password-store-1.6.5p0
+    - pinentry-gtk2-0.9.6
     - mpc-0.27p0
     - ncmpc-0.24v0
 
