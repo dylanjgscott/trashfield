@@ -32,7 +32,6 @@
     - gtar-1.29
     - python-2.7.12
     - unzip-6.0p9
-    - vim-7.4.1467p1-no_x11
 
 - name: create links for python
   file:
