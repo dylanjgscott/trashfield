@@ -25,3 +25,9 @@
     - src: hostname.em1
       dest: /etc/hostname.em1
   notify: enable interfaces
+
+- name: diable sndiod
+  service:
+    name: sndiod
+    enabled: no
+    state: stopped
