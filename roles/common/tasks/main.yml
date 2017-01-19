@@ -28,7 +28,6 @@
     state: present
   with_items:
     - ansible-2.1.0.0
-    - git-2.9.0
     - gtar-1.29
     - python-2.7.12
     - unzip-6.0p9
@@ -50,6 +49,7 @@
 
 - name: create user
   user:
+    groups: dialer
     name: "{{ user }}"
     state: present
 
