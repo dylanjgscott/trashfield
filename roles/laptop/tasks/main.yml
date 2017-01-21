@@ -16,6 +16,11 @@
     - pinentry-gtk2-0.9.6
     - vim-7.4.1467p1-no_x11
 
+- name: quiet down sndiod
+  copy:
+    src: mixerctl.conf
+    dest: /etc/mixerctl.conf
+
 - name: fetch ports tree
   unarchive:
     copy: no
