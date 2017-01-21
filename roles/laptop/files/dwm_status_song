@@ -1,7 +1,9 @@
 #!/usr/local/bin/fish
 set -l 0 (status -f)
 test "$FLOCK" != "$0"; and exec env FLOCK="$0" flock -nx "$0" "$0" $argv
-while true
-  dwm_status
+while dwm_status
   mpc idle
+  if test $status != 0
+    exit 1
+  end
 end
