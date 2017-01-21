@@ -1,3 +1,5 @@
 ---
 
+domain: dylanscott.com.au
+email: "{{ lookup('file', '~' + user + '/.email') }}"
 user: dylan

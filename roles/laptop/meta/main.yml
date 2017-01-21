@@ -6,3 +6,4 @@ dependencies:
   - role: fish
   - role: mpd
   - role: openup
+  - role: smtpd
