@@ -21,6 +21,12 @@
     src: mixerctl.conf
     dest: /etc/mixerctl.conf
 
+- name: configure pf
+  copy:
+    src: pf.conf
+    dest: /etc/pf.conf
+  notify: reload pf
+
 - name: fetch ports tree
   unarchive:
     copy: no
