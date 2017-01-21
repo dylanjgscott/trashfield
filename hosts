@@ -1,5 +1,5 @@
 [router]
-192.168.0.13 ansible_python_interpreter=/usr/local/bin/python2.7
+172.16.0.1 ansible_python_interpreter=/usr/local/bin/python2.7
 
 [laptop]
-127.0.0.1 ansible_python_interpreter=/usr/local/bin/python2.7
+172.16.0.130 ansible_python_interpreter=/usr/local/bin/python2.7
