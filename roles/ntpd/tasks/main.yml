@@ -1,0 +1,14 @@
+---
+
+- name: configure ntpd
+  copy:
+    src: ntpd.conf
+    dest: /etc/ntpd.conf
+  notify: restart ntpd
+
+- name: enable ntpd
+  service:
+    enabled: yes
+    name: ntpd
+    state: started
+  notify: restart ntpd
