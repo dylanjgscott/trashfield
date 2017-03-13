@@ -11,6 +11,7 @@
     - git-2.9.0
     - gnupg-2.1.9p0
     - mpc-0.27p0
+    - mplayer-20160306p2
     - ncmpc-0.24v0
     - password-store-1.6.5p0
     - pinentry-gtk2-0.9.6
@@ -25,6 +26,7 @@
   copy:
     src: pf.conf
     dest: /etc/pf.conf
+    mode: 0600
   notify: reload pf
 
 - name: fetch ports tree

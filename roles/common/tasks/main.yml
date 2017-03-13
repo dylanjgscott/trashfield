@@ -49,6 +49,7 @@
 
 - name: create user
   user:
+    append: yes
     groups: dialer
     name: "{{ user }}"
     state: present

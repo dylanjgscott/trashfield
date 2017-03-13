@@ -1,5 +1,7 @@
 [router]
-router.trashfield.dylanscott.com.au. ansible_python_interpreter=/usr/local/bin/python2.7
+#router.trashfield.dylanscott.com.au. ansible_python_interpreter=/usr/local/bin/python2.7
 
 [laptop]
-laptop.trashfield.dylanscott.com.au. ansible_python_interpreter=/usr/local/bin/python2.7
+#laptop.trashfield.dylanscott.com.au. ansible_python_interpreter=/usr/local/bin/python2.7
+127.0.0.1 ansible_python_interpreter=/usr/local/bin/python2.7
+
