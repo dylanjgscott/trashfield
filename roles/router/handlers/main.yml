@@ -1,10 +1,23 @@
 ---
 
 - name: enable routing
-  command: /sbin/sysctl net.inet.ip.forwarding=1
+  command: "/sbin/sysctl {{ item }}"
+  with_items:
+    - net.inet.ip.forwarding=1
+    - net.inet6.ip6.forwarding=1
 
 - name: enable interfaces
   command: /bin/sh /etc/netstart
+
+- name: restart dhcp6c
+  service:
+    name: dhcp6c
+    state: restarted
+
+- name: restart rtadvd
+  service:
+    name: rtadvd
+    state: restarted
 
 - name: reload pf
   command: /sbin/pfctl -f /etc/pf.conf

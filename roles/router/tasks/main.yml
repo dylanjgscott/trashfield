@@ -1,10 +1,20 @@
 ---
 
+- name: install packages
+  openbsd_pkg:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - wide-dhcpv6
+
 - name: enable routing
   lineinfile:
     create: yes
     dest: /etc/sysctl.conf
-    line: net.inet.ip.forwarding=1
+    line: "{{ item }}"
+  with_items:
+    - net.inet.ip.forwarding=1
+    - net.inet6.ip6.forwarding=1
   notify: enable routing
 
 - name: configure pf
@@ -14,11 +24,33 @@
     mode: 0600
   notify: reload pf
 
+- name: configure dhcp6c
+  copy:
+    dest: "{{ item.dest }}"
+    src: "{{ item.src }}"
+  with_items:
+    - src: dhcp6c
+      dest: /etc/rc.d/dhcp6c
+
+- name: configure dhcp6c flags
+  lineinfile:
+    dest: /etc/rc.conf.local
+    line: dhcp6c_flags=pppoe0
+    state: present
+  notify: restart dhcp6c
+
+- name: configure rtadvd flags
+  lineinfile:
+    dest: /etc/rc.conf.local
+    line: rtadvd_flags=em1
+    state: present
+  notify: restart rtadvd
+
 - name: configure interfaces
   copy:
-    src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: 0600
+    src: "{{ item.src }}"
   with_items:
     - src: hostname.em0
       dest: /etc/hostname.em0
@@ -26,7 +58,14 @@
       dest: /etc/hostname.em1
   notify: enable interfaces
 
-- name: diable sndiod
+- name: configure pppoe
+  template:
+    dest: /etc/hostname.pppoe0
+    mode: 0600
+    src: hostname.pppoe0
+  notify: enable interfaces
+
+- name: disable sndiod
   service:
     name: sndiod
     enabled: no

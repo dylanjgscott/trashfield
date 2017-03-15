@@ -3,11 +3,15 @@
 - hosts: laptop
   become: yes
   become_method: doas
+  vars_files:
+    -  vault.yml
   roles:
     - laptop
 
 - hosts: router
   become: yes
   become_method: doas
+  vars_files:
+    -  vault.yml
   roles:
     - router

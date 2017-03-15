@@ -1,8 +1,5 @@
 ---
 
-aria_secret: "{{ lookup('password', '/home/' + user + '/.aria2/aria2.secret') }}"
 domain: dylanscott.com.au
-email: "{{ lookup('file', '~' + user + '/.email') }}"
 fish_version: 2.4.0
-mpd_password: "{{ lookup('password', '/home/' + user + '/.mpd/mpd.password') }}"
 user: dylan

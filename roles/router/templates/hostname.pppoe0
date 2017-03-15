@@ -1,0 +1,10 @@
+inet 0.0.0.0 255.255.255.255 NONE \
+  pppoedev em0 \
+  authproto chap \
+  authname {{ pppoe_username }} \
+  authkey {{ pppoe_password }}
+dest 0.0.0.1
+inet6 eui64
+!/sbin/route add default -ifp pppoe0 0.0.0.1
+!/sbin/route add -inet6 default -ifp pppoe0 fe80::%pppoe0
+!/etc/rc.d/dhcp6c restart

@@ -1,0 +1,10 @@
+- name: install tor
+  openbsd_pkg:
+    name: tor-0.2.7.6p2
+    state: present
+
+- name: enable tor
+  service:
+    name: tor
+    state: started
+    enabled: yes
