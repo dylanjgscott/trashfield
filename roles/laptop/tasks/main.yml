@@ -1,5 +1,11 @@
 ---
 
+- name: configure wifi
+  template:
+    dest: /etc/hostname.iwm0
+    src: hostname.iwm0
+  notify: configure interfaces
+
 - name: install packages
   openbsd_pkg:
     name: "{{ item }}"

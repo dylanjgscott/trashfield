@@ -1,0 +1,5 @@
+nwid {{ wifi_name }}
+wpakey {{ wifi_key }}
+media mode 11g
+dhcp
+inet6 autoconf

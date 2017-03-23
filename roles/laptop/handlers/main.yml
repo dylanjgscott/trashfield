@@ -5,5 +5,8 @@
     name: apmd
     state: restarted
 
+- name: configure interfaces
+  command: sh /etc/netstart
+
 - name: reload pf
   command: pfctl -f /etc/pf.conf
