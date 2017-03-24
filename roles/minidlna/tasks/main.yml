@@ -1,0 +1,18 @@
+---
+
+- name: install minidlna
+  openbsd_pkg:
+    name: minidlna-minidlna-1.1.5p2
+    state: present
+
+- name: configure minidlna
+  copy:
+    src: minidlna.conf
+    dest: /etc/minidlna.conf
+  notify: restart minidlna
+
+- name: enable minidlna
+  service:
+    enabled: yes
+    name: minidlna
+    state: started
