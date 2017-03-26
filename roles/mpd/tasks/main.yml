@@ -2,30 +2,27 @@
 
 - name: install packages
   openbsd_pkg:
+    name: mpd-0.19.17
+    state: present
+  when: ansible_system == 'OpenBSD'
+
+- name: install packages
+  apt:
     name: "{{ item }}"
     state: present
   with_items:
-    - mpd-0.19.17
-    - mpc-0.27p0
-    - ncmpc-0.24v0
-
-- name: create mpd directory
-  file:
-    dest: "{{ item.dest }}"
-    group: "{{ user }}"
-    owner: "{{ user }}"
-    state: directory
-  with_items:
-    - src: mpd.conf
-      dest: "/home/{{ user }}/.mpd"
+    - mpc
+    - mpc
+  when: ansible_system == 'Linux'
 
 - name: configure mpd
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    group: "{{ user }}"
-    owner: "{{ user }}"
-  with_items:
-    - src: mpd.conf
-      dest: "/home/{{ user }}/.mpd/mpd.conf"
+  copy:
+    src: mpd.conf
+    dest: /etc/mpd.conf
+  notify: restart mpd
 
+- name: enable mpd
+  service:
+    enabled: yes
+    name: mpd
+    state: started

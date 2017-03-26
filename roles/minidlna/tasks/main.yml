@@ -4,6 +4,13 @@
   openbsd_pkg:
     name: minidlna-minidlna-1.1.5p2
     state: present
+  when: ansible_system == 'OpenBSD'
+
+- name: install minidlna
+  apt:
+    name: minidlna
+    state: present
+  when: ansible_system == 'Linux'
 
 - name: configure minidlna
   copy:

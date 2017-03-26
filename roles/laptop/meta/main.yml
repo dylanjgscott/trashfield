@@ -1,11 +1,8 @@
 ---
 
 dependencies:
-  - aria2
   - common
   - fish
-  - minidlna
-  - mpd
   - ntpd
   - openup
   - smtpd

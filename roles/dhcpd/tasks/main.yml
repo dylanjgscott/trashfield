@@ -6,8 +6,14 @@
     dest: /etc/dhcpd.conf
   notify: restart dhcpd
 
-- name: enable dhcpd
+- name: configure dhcpd options
+  lineinfile:
+    dest: /etc/rc.conf.local
+    line: dhcpd_flags=em1
+    state: present
+  notify: restart dhcpd
+
+- name: start dhcpd
   service:
     name: dhcpd
-    enabled: yes
     state: started

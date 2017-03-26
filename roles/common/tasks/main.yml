@@ -21,6 +21,7 @@
     src: pkg.conf
     dest: /etc/pkg.conf
     mode: 0600
+  when: ansible_system == 'OpenBSD'
 
 - name: install common packages
   openbsd_pkg:
@@ -31,6 +32,7 @@
     - gtar-1.29
     - python-2.7.12
     - unzip-6.0p9
+  when: ansible_system == 'OpenBSD'
 
 - name: create links for python
   file:
@@ -46,11 +48,11 @@
       dest: /usr/local/bin/python-config
     - src: /usr/local/bin/pydoc2.7
       dest: /usr/local/bin/pydoc
+  when: ansible_system == 'OpenBSD'
 
 - name: create user
   user:
     append: yes
-    groups: dialer
     name: "{{ user }}"
     state: present
 
@@ -66,5 +68,6 @@
   lineinfile:
     create: yes
     dest: /etc/doas.conf
-    line: "permit nopass keepenv {{ user }} as root"
+    line: "permit nopass keepenv {{ user }}"
     mode: 0600
+  when: ansible_system == 'OpenBSD'
