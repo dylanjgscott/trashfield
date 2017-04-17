@@ -1,12 +1,5 @@
 ---
 
-- name: install packages
-  openbsd_pkg:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - wide-dhcpv6
-
 - name: enable routing
   lineinfile:
     create: yes
@@ -23,21 +16,6 @@
     dest: /etc/pf.conf
     mode: 0600
   notify: reload pf
-
-- name: configure dhcp6c
-  copy:
-    dest: "{{ item.dest }}"
-    src: "{{ item.src }}"
-  with_items:
-    - src: dhcp6c
-      dest: /etc/rc.d/dhcp6c
-
-- name: configure dhcp6c flags
-  lineinfile:
-    dest: /etc/rc.conf.local
-    line: dhcp6c_flags=pppoe0
-    state: present
-  notify: restart dhcp6c
 
 - name: configure rtadvd flags
   lineinfile:
