@@ -1,6 +1,6 @@
 ---
 
-- name: reload dhcpd
+- name: restart dhcpd
   service:
     name: dhcpd
-    state: reloaded
+    state: restarted

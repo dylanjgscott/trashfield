@@ -4,14 +4,14 @@
   copy:
     src: dhcpd.conf
     dest: /etc/dhcpd.conf
-  notify: reload dhcpd
+  notify: restart dhcpd
 
 - name: configure dhcpd options
   lineinfile:
     dest: /etc/rc.conf.local
     line: dhcpd_flags=em1
     state: present
-  notify: reload dhcpd
+  notify: restart dhcpd
 
 - name: start dhcpd
   service:
