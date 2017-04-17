@@ -1,26 +1,37 @@
 ---
 
+- name: configure ntpd
+  copy:
+    dest: /etc/ntpd.conf
+    src: ntpd.conf
+  notify: restart ntpd
+
+- name: enable ntpd
+  service:
+    enabled: yes
+    name: ntpd
+    state: started
+
 - name: disallow root login
   lineinfile:
+    dest: /etc/ssh/sshd_config
     line: PermitRootLogin no
     regexp: PermitRootLogin
-    dest: /etc/ssh/sshd_config
     state: present
   notify: restart sshd
 
 - name: disallow password authentication
   lineinfile:
+    dest: /etc/ssh/sshd_config
     line: PasswordAuthentication no
     regexp: PasswordAuthentication
-    dest: /etc/ssh/sshd_config
     state: present
   notify: restart sshd
 
-- name: configure pkg
-  copy:
-    src: pkg.conf
-    dest: /etc/pkg.conf
-    mode: 0600
+- name: configure installurl
+  lineinfile:
+    dest: /etc/installurl
+    line: http://mirror.internode.on.net/pub/OpenBSD
   when: ansible_system == 'OpenBSD'
 
 - name: install common packages
@@ -28,10 +39,10 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - ansible-2.1.0.0
+    - ansible
     - gtar-1.29
-    - python-2.7.12
-    - unzip-6.0p9
+    - python
+    - unzip-6.0p10
   when: ansible_system == 'OpenBSD'
 
 - name: create links for python

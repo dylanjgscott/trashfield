@@ -3,7 +3,4 @@
 dependencies:
   - common
   - dhcpd
-  - ntpd
-  - openup
-  - smtpd
   - unbound

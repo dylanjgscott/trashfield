@@ -1,8 +1,10 @@
 setxkbmap -option caps:escape
 xrdb -merge ~/.Xresources
 xsetroot -solid black
-mpd
-~/bin/dwm_status_clock &
-~/bin/dwm_status_song &
-xidle -timeout 60 &
+while true; do
+  BAT=`apm -l`
+  TIME=`date +%H:%m`
+  xsetroot -name "$BAT% $TIME"
+  sleep 60
+done &
 exec dwm

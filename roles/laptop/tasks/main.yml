@@ -11,23 +11,18 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - chromium-51.0.2704.106p0
-    - dwm-6.1
-    - firefox-47.0.1
-    - flock-20110525p1
-    - git-2.9.0
-    - gnupg-2.1.9p0
-    - mpc-0.27p0
-    - mplayer-20160306p2
-    - ncmpc-0.24v0
-    - password-store-1.6.5p0
-    - pinentry-gtk2-0.9.6
-    - vim-7.4.1467p1-no_x11
-
-- name: quiet down sndiod
-  copy:
-    src: mixerctl.conf
-    dest: /etc/mixerctl.conf
+    - chromium
+    - dwm
+    - firefox
+    - git
+    - gnupg
+    - mpc
+    - mplayer
+    - ncmpc
+    - password-store
+    - pinentry-gtk2
+    - vim
+    - zsh
 
 - name: configure pf
   copy:
@@ -35,14 +30,6 @@
     dest: /etc/pf.conf
     mode: 0600
   notify: reload pf
-
-- name: fetch ports tree
-  unarchive:
-    copy: no
-    creates: /usr/ports
-    dest: /usr
-    remote_src: yes
-    src: http://mirror.internode.on.net/pub/OpenBSD/6.0/ports.tar.gz
 
 - name: create user directories
   file:
@@ -78,25 +65,3 @@
     line: apmd_flags=-A
     state: present
   notify: restart apmd
-
-- name: user bin directory
-  file:
-    path: "/home/{{ user }}/bin"
-    state: directory
-    group: "{{ user }}"
-    owner: "{{ user }}"
-
-- name: user bin files
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    group: "{{ user }}"
-    owner: "{{ user }}"
-    mode: 0755
-  with_items:
-    - src: dwm_status
-      dest: "/home/{{ user }}/bin/dwm_status"
-    - src: dwm_status_clock
-      dest: "/home/{{ user }}/bin/dwm_status_clock"
-    - src: dwm_status_song
-      dest: "/home/{{ user }}/bin/dwm_status_song"

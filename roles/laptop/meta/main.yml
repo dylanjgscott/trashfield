@@ -2,8 +2,3 @@
 
 dependencies:
   - common
-  - fish
-  - ntpd
-  - openup
-  - smtpd
-  - tor

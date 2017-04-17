@@ -1,5 +1,5 @@
 ---
 
-domain: dylanscott.com.au
-fish_version: 2.4.0
 user: dylan
+nwid: Trashfield
+wpakey: "{{ lookup('password', '~/.trashfield') }}"
