@@ -3,7 +3,7 @@ xrdb -merge ~/.Xresources
 xsetroot -solid black
 while true; do
   BAT=`apm -l`
-  TIME=`date +%H:%m`
+  TIME=`date +%H:%M`
   xsetroot -name "$BAT% $TIME"
   sleep 60
 done &
