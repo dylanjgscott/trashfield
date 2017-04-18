@@ -1,5 +1,22 @@
 ---
 
+- name: install dhcpcd
+  openbsd_pkg:
+    name: dhcpcd
+    state: present
+
+- name: configure dhcpcd
+  copy:
+    src: dhcpcd.conf
+    dest: /etc/dhcpcd.conf
+  notify: reload dhcpcd
+
+- name: enable dhcpcd
+  service:
+    name: dhcpcd
+    state: started
+    enabled: yes
+
 - name: enable routing
   lineinfile:
     create: yes

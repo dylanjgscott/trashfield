@@ -19,5 +19,10 @@
     name: rtadvd
     state: restarted
 
+- name: reload dhcpcd
+  service:
+    name: dhcpcd
+    state: reloaded
+
 - name: reload pf
   command: /sbin/pfctl -f /etc/pf.conf
