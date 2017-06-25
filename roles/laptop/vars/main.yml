@@ -2,4 +2,4 @@
 
 user: dylan
 nwid: Trashfield
-wpakey: "{{ lookup('password', '~/.trashfield') }}"
+wpakey: "{{ lookup('pipe', 'pass trashfield/wpakey') }}"

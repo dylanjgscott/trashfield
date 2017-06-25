@@ -2,5 +2,5 @@
 
 domain: dylanscott.com.au
 user: dylan
-pppoe_username: "{{ lookup('password', '~/.pppoe_username') }}"
-pppoe_password: "{{ lookup('password', '~/.pppoe_password') }}"
+pppoe_username: dylanscott@internode.on.net
+pppoe_password: "{{ lookup('pipe', 'pass internode/dylanscott@internode.on.net') }}"
