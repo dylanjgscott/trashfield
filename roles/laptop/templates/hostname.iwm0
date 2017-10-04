@@ -1,5 +1,4 @@
 nwid {{ nwid }}
 wpakey {{ wpakey }}
-media mode 11g
 dhcp
 inet6 autoconf
