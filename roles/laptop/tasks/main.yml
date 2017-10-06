@@ -48,8 +48,8 @@
     owner: "{{ user }}"
     group: "{{ user }}"
   with_items:
-    - src: Xresources
-      dest: "/home/{{ user }}/.Xresources"
+    - src: Xdefaults
+      dest: "/home/{{ user }}/.Xdefaults"
     - src: user-dirs.dirs
       dest: "/home/{{ user }}/.config/user-dirs.dirs"
     - src: vimrc

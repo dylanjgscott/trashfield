@@ -1,5 +1,4 @@
 setxkbmap -option caps:escape
-xrdb -merge ~/.Xresources
 xsetroot -solid black
 while true; do
   BAT=`apm -l`
