@@ -13,12 +13,10 @@
   with_items:
     - chromium
     - dwm
-    - firefox
     - git
     - gnupg
     - mpc
     - mplayer
-    - ncmpc
     - password-store
     - pinentry-gtk2
     - vim

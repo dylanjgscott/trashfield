@@ -29,10 +29,9 @@
   notify: restart sshd
 
 - name: configure installurl
-  lineinfile:
+  copy:
     dest: /etc/installurl
-    line: http://mirror.internode.on.net/pub/OpenBSD
-  when: ansible_system == 'OpenBSD'
+    content: https://fastly.cdn.openbsd.org/pub/OpenBSD
 
 - name: install common packages
   openbsd_pkg:
@@ -40,26 +39,6 @@
     state: present
   with_items:
     - ansible
-    - gtar-1.29
-    - python
-    - unzip-6.0p10
-  when: ansible_system == 'OpenBSD'
-
-- name: create links for python
-  file:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    state: link
-  with_items:
-    - src: /usr/local/bin/python2.7
-      dest: /usr/local/bin/python
-    - src: /usr/local/bin/python2.7-2to3
-      dest: /usr/local/bin/2to3
-    - src: /usr/local/bin/python2.7-config
-      dest: /usr/local/bin/python-config
-    - src: /usr/local/bin/pydoc2.7
-      dest: /usr/local/bin/pydoc
-  when: ansible_system == 'OpenBSD'
 
 - name: create user
   user:
@@ -79,6 +58,5 @@
   lineinfile:
     create: yes
     dest: /etc/doas.conf
-    line: "permit nopass keepenv {{ user }}"
+    line: "permit nopass {{ user }}"
     mode: 0600
-  when: ansible_system == 'OpenBSD'
