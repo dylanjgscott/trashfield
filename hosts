@@ -5,4 +5,4 @@ router.trashfield.dylanscott.com.au ansible_python_interpreter=/usr/local/bin/py
 laptop.trashfield.dylanscott.com.au ansible_python_interpreter=/usr/local/bin/python2.7
 
 [pi]
-pi.trashfield.dylanscott.com.au
+pi.trashfield.dylanscott.com.au ansible_python_interpreter=/usr/local/bin/python2.7
