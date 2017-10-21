@@ -2,15 +2,8 @@
 
 - name: install packages
   openbsd_pkg:
-    name: aria2-1.24.0
-    state: present
-  when: ansible_system == 'OpenBSD'
-
-- name: install packages
-  apt:
     name: aria2
     state: present
-  when: ansible_system == 'Linux'
 
 - name: create aria directory
   file:

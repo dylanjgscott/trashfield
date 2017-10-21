@@ -2,18 +2,8 @@
 
 - name: install packages
   openbsd_pkg:
-    name: mpd-0.19.17
+    name: mpd
     state: present
-  when: ansible_system == 'OpenBSD'
-
-- name: install packages
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - mpc
-    - mpc
-  when: ansible_system == 'Linux'
 
 - name: configure mpd
   copy:

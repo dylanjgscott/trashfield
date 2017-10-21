@@ -7,10 +7,12 @@
   notify: restart ntpd
 
 - name: enable ntpd
-  service:
-    enabled: yes
-    name: ntpd
-    state: started
+  lineinfile:
+    line: ntpd_flags=-s
+    path: /etc/rc.conf.local
+    regexp: ntpd_flags
+    state: present
+  notify: restart ntpd
 
 - name: disallow root login
   lineinfile:
@@ -31,14 +33,7 @@
 - name: configure installurl
   copy:
     dest: /etc/installurl
-    content: https://fastly.cdn.openbsd.org/pub/OpenBSD
-
-- name: install common packages
-  openbsd_pkg:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - ansible
+    content: "https://fastly.cdn.openbsd.org/pub/OpenBSD\n"
 
 - name: create user
   user:
@@ -55,8 +50,7 @@
     user: "{{ user }}"
 
 - name: configure doas
-  lineinfile:
-    create: yes
+  copy:
+    content: "permit nopass {{ user }} as root\n"
     dest: /etc/doas.conf
-    line: "permit nopass {{ user }}"
     mode: 0600

@@ -62,4 +62,5 @@
     dest: /etc/rc.conf.local
     line: apmd_flags=-A -z 5
     state: present
+    regexp: apmd_flags
   notify: restart apmd
