@@ -60,7 +60,7 @@
 - name: enable apmd
   lineinfile:
     dest: /etc/rc.conf.local
-    line: apmd_flags=-A -z 5
+    line: apmd_flags=-Aaz 5
     state: present
     regexp: apmd_flags
   notify: restart apmd
