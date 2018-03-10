@@ -1,5 +1,0 @@
----
-
-user: dylan
-nwid: Trashfield
-wpakey: "{{ lookup('pipe', 'pass trashfield/wpakey') }}"

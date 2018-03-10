@@ -1,11 +1,5 @@
 ---
 
-- hosts: laptop
-  become: yes
-  become_method: doas
-  roles:
-    - laptop
-
 - hosts: router
   become: yes
   become_method: doas

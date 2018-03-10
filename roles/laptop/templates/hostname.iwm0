@@ -1,4 +1,0 @@
-nwid {{ nwid }}
-wpakey {{ wpakey }}
-dhcp
-inet6 autoconf

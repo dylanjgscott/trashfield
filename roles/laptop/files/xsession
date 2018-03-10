@@ -1,9 +1,0 @@
-setxkbmap -option caps:escape
-xsetroot -solid black
-while true; do
-  BAT=`apm -l`
-  TIME=`date +%H:%M`
-  xsetroot -name "$BAT% $TIME"
-  sleep 60
-done &
-exec dwm
