@@ -1,5 +1,9 @@
 ---
 
+- name: open vault
+  include_vars:
+    file: vault.yml
+
 - name: install dhcpcd
   openbsd_pkg:
     name: dhcpcd

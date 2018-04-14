@@ -1,5 +1,5 @@
 [router]
-router.trashfield.dylanscott.com.au ansible_python_interpreter=/usr/local/bin/python2.7
+router.trashfield.dylanscott.com.au ansible_python_interpreter=/usr/local/bin/python2.7 ansible_user=dylan
 
 [pi]
-pi.trashfield.dylanscott.com.au ansible_python_interpreter=/usr/local/bin/python2.7
+pi.trashfield.dylanscott.com.au ansible_python_interpreter=/usr/local/bin/python2.7 ansible_user=dylan
