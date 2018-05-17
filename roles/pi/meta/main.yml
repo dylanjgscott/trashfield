@@ -1,6 +1,5 @@
 ---
 
 dependencies:
-  - aria2
   - common
   - minidlna
